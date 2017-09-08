@@ -16,6 +16,23 @@ const getBeersAPI = () => fetch('https://api.punkapi.com/v2/beers')
     document.getElementById('result').innerHTML = result
 })
 
+
+
+getBeersAPI()
+
+const search = (name, yeast) => {
+    if (yeast != "" && name != "") {
+        getBeersByNameAndYeast(name,yeast)
+    } else if (yeast != "") {
+        getBeersByYeast(yeast)
+    } else if (name != "") {
+        getBeersByName(name)
+    } else {
+        let result = "No result";
+        document.getElementById('result').innerHTML = result
+    }
+}
+
 const getBeersByName = (name) => fetch(`https://api.punkapi.com/v2/beers/?beer_name=${name}`)
 .then(response => response.json())
 .catch(e => console.err('Fail'))
@@ -69,18 +86,3 @@ const getBeersByNameAndYeast = (name,yeast) => fetch(`https://api.punkapi.com/v2
     }
     document.getElementById('result').innerHTML = result
 })
-
-getBeersAPI()
-
-const search = (name, yeast) => {
-    if (yeast != "" && name != "") {
-        getBeersByNameAndYeast(name,yeast)
-    } else if (yeast != "") {
-        getBeersByYeast(yeast)
-    } else if (name != "") {
-        getBeersByName(name)
-    } else {
-        let result = "No result";
-        document.getElementById('result').innerHTML = result
-    }
-}
